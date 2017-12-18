@@ -10,8 +10,8 @@ var app = express();
 // app.use(express.static(__dirname + '/../react-client/dist'));
 
 // UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
+app.use(express.static(__dirname + '/../angular-client'));
+app.use(express.static(__dirname + '/../node_modules'));
 
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
@@ -26,4 +26,39 @@ app.get('/items', function (req, res) {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
+
+// let bookSearch = (cb) => {
+//   let options = {
+//     url: `https://googleapis.com`,
+//     headers: {
+//       "User-Agent": "request",
+//       Authorization: API_KEY
+//     }
+//   };
+
+//   request(options, (err, res) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       cb(res.body);
+//     }
+//   });
+// };
+
+
+// $.ajax({
+//   url: "https://www.googleapis.com/books/v1/volumes",
+//   data: {
+//     format: "json",
+//     q: "william faulkner"
+//   },
+//   error: function(err) {
+//     console.error(err);
+//   },
+//   dataType: "jsonp",
+//   success: function(data) {
+//     console.log(data.items);
+//   },
+//   type: "GET"
+// });
 

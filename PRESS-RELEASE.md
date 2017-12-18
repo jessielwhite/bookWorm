@@ -18,7 +18,7 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   <!-- >> Name the product in a way the reader (i.e. your target customers) will understand. -->
-  My app is : bookWorm
+  bookWorm
 
 
 ## Sub-Heading ##
