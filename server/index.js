@@ -1,18 +1,19 @@
+// import axios from "axios";
+
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+var items = require('../database-mongo');
+var mongoose = require("mongoose");
 
 var app = express();
+var Book = mongoose.model("Book", {
+  text: String
+});
 
-// UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
-
-// UNCOMMENT FOR ANGULAR
 app.use(express.static(__dirname + '/../angular-client'));
 app.use(express.static(__dirname + '/../node_modules'));
-
+app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use(bodyParser.json());  
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
     if(err) {
@@ -27,23 +28,16 @@ app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
-// let bookSearch = (cb) => {
-//   let options = {
-//     url: `https://googleapis.com`,
-//     headers: {
-//       "User-Agent": "request",
-//       Authorization: API_KEY
-//     }
-//   };
+app.get('/books', function(req, res) {
+  // use mongoose to get all todos in the database
+  Book.find(function(err, books) {
+    // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+    if (err) res.send(err);
 
-//   request(options, (err, res) => {
-//     if (err) {
-//       console.error(err);
-//     } else {
-//       cb(res.body);
-//     }
-//   });
-// };
+    res.json(books); // return all todos in JSON format
+    console.log(books.items);
+  });
+});
 
 
 // $.ajax({
@@ -61,4 +55,14 @@ app.listen(3000, function() {
 //   },
 //   type: "GET"
 // });
+
+
+// axios.fetch("https://www.googleapis.com/books/v1/volumes")
+//    .then((response) => {
+//   console.log('Successfully fetched response data', response.data.items); // ex.: { user: 'Your User'}
+//   console.log(response.status); // ex.: 200
+// })
+//   .catch(err => {
+//     console.log('error fetching API data', err);
+//   });
 

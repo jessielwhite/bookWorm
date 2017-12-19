@@ -3,6 +3,10 @@ angular.module('app')
   bindings: {
     item: '<',
   },
-  controller: function() {},
+  controller: function(booksService) {
+    this.addToBookshelf = book => {
+      booksService.addBook(book);
+    }
+  },
   templateUrl: '/templates/list-item.html'
 });
