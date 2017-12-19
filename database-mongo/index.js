@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var config = require('../config.js');
+mongoose.connect(config.MONGO_URI);
 
 var db = mongoose.connection;
 
@@ -11,15 +12,19 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var bookSchema  = mongoose.Schema({
+  image: String,
+  url: String,
+  author: String,
+  title: String,
+  price: String,
+  isbn: String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Book = mongoose.model('Book', bookSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Book.find({}, function(err, items) {
     if(err) {
       callback(err, null);
     } else {
@@ -28,4 +33,18 @@ var selectAll = function(callback) {
   });
 };
 
+var add = function(book, callback) {
+  console.log(JSON.stringify(book));
+  let newBook = new Book({
+    image: book.volumeInfo.imageLinks.smallThumbnail,
+    url: book.volumeInfo.infoLink,
+    author: Array.isArray(book.volumeInfo.authors) ? book.volumeInfo.authors[0] : "N/A",
+    title: book.volumeInfo.title,
+    price: book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : "N/A",
+    isbn: Array.isArray(book.volumeInfo.industryIdentifiers) ? book.volumeInfo.industryIdentifiers[0].identifier : "N/A"
+  });
+  newBook.save();
+};
+
 module.exports.selectAll = selectAll;
+module.exports.add = add;

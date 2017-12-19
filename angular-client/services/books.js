@@ -1,6 +1,6 @@
 angular.module("app")
 .service("booksService", function($http) {
-  this.getBookshelf = function(query, callback) {
+  this.getBookshelf = function(callback) {
     $http
       .get("/books")
       .then(function({ data }) {
