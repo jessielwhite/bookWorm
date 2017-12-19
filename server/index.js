@@ -23,12 +23,23 @@ app.get('/books', function (req, res) {
 });
 
 app.post('/book', function(req, res) {
-  console.log(req.body.params.book);
+  //console.log(req.body);
   books.add(req.body.params.book, function(err, res) {
     if(err) {
       res.sendStatus(500);
     } else {
       res.end("Success!");
+    }
+  });
+});
+
+app.delete("/book", function(req, res) {
+  console.log(req.body);
+  books.remove(req.body.bookId, function(err) {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.end("Book successfully removed!");
     }
   });
 });

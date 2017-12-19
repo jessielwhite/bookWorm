@@ -1,0 +1,15 @@
+<div>
+  <img ng-src="{{$ctrl.book.image}}" />
+  <p>{{ $ctrl.book._id }}</p>
+  <p>{{ $ctrl.book.author }}</p>
+  <p>{{ $ctrl.book.title }}</p>
+  <p>{{ $ctrl.book.isbn }}</p>
+  <p>{{ $ctrl.book.url }}</p>
+  <div>
+    <button class="btn" ng-click="$ctrl.removeFromBookshelf($ctrl.book)">
+      Remove from Bookshelf!
+    </button>
+  </div>
+</div>
+
+

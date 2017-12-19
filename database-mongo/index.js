@@ -34,9 +34,9 @@ var selectAll = function(callback) {
 };
 
 var add = function(book, callback) {
-  console.log(JSON.stringify(book));
+  console.log(JSON.stringify(book.volumeInfo.title));
   let newBook = new Book({
-    image: book.volumeInfo.imageLinks.smallThumbnail,
+    image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "N/A",
     url: book.volumeInfo.infoLink,
     author: Array.isArray(book.volumeInfo.authors) ? book.volumeInfo.authors[0] : "N/A",
     title: book.volumeInfo.title,
@@ -46,5 +46,26 @@ var add = function(book, callback) {
   newBook.save();
 };
 
+var remove = function(bookId, callback) {
+  Book.findByIdAndRemove(bookId, (err, book) => {
+    // let response = {
+    //   message: "Book successfully deleted",
+    //   id: book._id
+    // };
+    // res.status(200).send(response);
+    callback(book);
+  });
+}
+
+// Todo.findByIdAndRemove(req.params.todoId, (err, todo) => {  
+//     // We'll create a simple object to send back with a message and the id of the document that was removed
+//     // You can really do this however you want, though.
+//     let response = {
+//         message: "Todo successfully deleted",
+//         id: todo._id
+//     };
+//     res.status(200).send(response);
+// });
+module.exports.remove = remove;
 module.exports.selectAll = selectAll;
 module.exports.add = add;

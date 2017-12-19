@@ -27,4 +27,25 @@ angular.module("app")
         console.log(err);
       });
   }
+
+  this.removeBook = function(book, callback) {
+    $http({
+      method: "DELETE",
+      url: "/book",
+      data: {
+        bookId: book._id
+      },
+      headers: {
+        "Content-type": "application/json;charset=utf-8"
+      }
+    })
+     .then(function({ data }) {
+        if (callback) {
+          callback(data);
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
 });

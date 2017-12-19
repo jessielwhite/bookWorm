@@ -1,0 +1,5 @@
+<div>
+    <h4> View your books! </h4>
+    There are {{$ctrl.bookshelf.length}} books.
+    <book-list-item ng-repeat="book in $ctrl.bookshelf" book=book />
+</div>
