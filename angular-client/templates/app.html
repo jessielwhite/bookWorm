@@ -1,11 +1,13 @@
 <div>
-  <div>
-    <search result="$ctrl.updateBooks"></search>
+  <h4> Welcome to bookWorm! </h4>
+  <div class="row">
+    <div class="col s6">
+      <search result="$ctrl.updateBooks"></search>
+      <list items="$ctrl.books"></list>
+    </div>
 
-    <p>Books to Add:</p>
-    <list items="$ctrl.books"></list>
-
-    <p>Current Bookshelf:</p>
-    <book-list bookshelf="$ctrl.bookshelf"></book-list>
+    <div class="col s6">
+      <book-list bookshelf="$ctrl.bookshelf"></book-list>
+    </div>
   </div>
 </div>
