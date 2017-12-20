@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var config = require('../config.js');
-mongoose.connect(config.MONGO_URI);
+
+mongoose.connect(process.env.MONGO_URI);
 
 var db = mongoose.connection;
 
