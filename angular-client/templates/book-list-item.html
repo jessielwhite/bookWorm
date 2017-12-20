@@ -3,9 +3,8 @@
     <img ng-src="{{$ctrl.book.image}}" />
   </a>
   <p>{{ $ctrl.book.author }}</p>
-  <p>{{ $ctrl.book._id }}</p>
   <p>{{ $ctrl.book.title }}</p>
-  <p>{{ $ctrl.book.isbn }}</p>
+  <p>ISBN: {{ $ctrl.book.isbn }}</p>
   <div>
     <button class="btn" ng-click="$ctrl.removeFromBookshelf($ctrl.book)">
       Remove from Bookshelf!
